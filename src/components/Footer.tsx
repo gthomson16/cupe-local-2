@@ -82,7 +82,15 @@ export default function Footer() {
           &copy; {new Date().getFullYear()} CUPE Local 2. All rights reserved. |{" "}
           <a href="https://cupe.ca" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
             CUPE National
-          </a>
+          </a>{" "}
+          |{" "}
+          <Link href="/privacy" className="hover:text-gray-300">
+            Privacy Policy
+          </Link>{" "}
+          |{" "}
+          <Link href="/accessibility" className="hover:text-gray-300">
+            Accessibility
+          </Link>
         </div>
       </div>
     </footer>
