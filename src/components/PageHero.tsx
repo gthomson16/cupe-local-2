@@ -8,7 +8,7 @@ interface PageHeroProps {
 export default function PageHero({ title, subtitle }: PageHeroProps) {
   return (
     <section className="relative h-56 overflow-hidden bg-cupe-navy sm:h-64 md:h-72">
-      <div className="absolute inset-y-0 right-0 w-3/5">
+      <div className="absolute inset-y-0 right-0 w-full sm:w-3/5">
         <Image
           src="/images/real/streetcar.jpg"
           alt=""

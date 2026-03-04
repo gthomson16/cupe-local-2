@@ -62,12 +62,13 @@ export default function Home() {
     <>
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-cupe-navy">
-        <div className="absolute inset-y-0 right-0 w-2/3">
+        <div className="absolute inset-y-0 right-0 w-full sm:w-2/3">
           <Image
             src="/images/real/481176644_1093023835960034_6130416129899750364_n.jpg"
             alt="TTC workers maintaining subway tunnel infrastructure"
             fill
-            className="object-cover object-right opacity-75"
+            className="object-cover object-[80%_center] sm:object-right opacity-75"
+            sizes="100vw"
             priority
           />
         </div>
