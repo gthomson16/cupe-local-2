@@ -10,6 +10,7 @@ A modern, professional redesign of [cupelocal2.com](https://cupelocal2.com) — 
 - **Styling:** Tailwind CSS 4 (utility-first, no CSS modules)
 - **Linting:** ESLint 9 with next/core-web-vitals + typescript configs
 - **Path alias:** `@/*` maps to `./src/*`
+- **Scraping:** Playwright (installed locally) for pulling assets from the original site
 
 ## Commands
 
@@ -27,25 +28,34 @@ src/
 ├── app/
 │   ├── layout.tsx           # Root layout (Navbar + Footer)
 │   ├── page.tsx             # Homepage
-│   ├── globals.css          # Tailwind theme + design tokens
-│   ├── news/page.tsx        # News articles listing
+│   ├── globals.css          # Tailwind theme + design tokens + animations
+│   ├── news/
+│   │   ├── page.tsx         # News articles listing
+│   │   └── [slug]/page.tsx  # Individual news article (dynamic route)
 │   ├── executives/page.tsx  # Executive board directory
 │   ├── documents/page.tsx   # PDF documents & resources
 │   ├── gallery/
 │   │   ├── page.tsx         # Photo album grid
 │   │   └── [slug]/page.tsx  # Individual album viewer (SSG)
-│   ├── forms/page.tsx       # External forms directory
+│   ├── forms/page.tsx       # Tabbed forms directory
 │   ├── contact/page.tsx     # Contact form + quick contacts
 │   └── registration/page.tsx # Member registration form
 ├── components/
 │   ├── Navbar.tsx           # Sticky header with responsive nav
 │   ├── Footer.tsx           # Site footer with links & social
-│   └── PageHero.tsx         # Reusable page hero banner
-└── data/
-    └── gallery.ts           # Album metadata (typed)
+│   ├── PageHero.tsx         # Reusable page hero banner (streetcar bg with mask fade)
+│   ├── AnimateIn.tsx        # Scroll-triggered animation wrapper (client component)
+│   ├── FormsTabbed.tsx      # Tabbed forms interface (client component)
+│   └── Lightbox.tsx         # Gallery lightbox viewer
+├── data/
+│   ├── gallery.ts           # Album metadata (typed)
+│   └── news.ts              # News article data (typed)
+└── hooks/
+    └── useInView.ts         # Intersection Observer hook for animations
 ```
 
 Images live in `public/images/real/` — gallery photos are in `public/images/real/gallery/`.
+Document thumbnails are in `public/images/real/documents/`.
 
 ## Design Tokens
 
@@ -69,6 +79,8 @@ Defined as CSS custom properties in `globals.css` and used via Tailwind classes 
 - **Components:** Functional components with TypeScript interfaces. Only add `"use client"` when hooks are needed
 - **Data:** Define data arrays as typed constants within page files or in `src/data/`
 - **Images:** Use `next/image` with `fill` for backgrounds, explicit dimensions elsewhere. Always include `alt` text
+- **Image effects:** Use CSS `[mask-image:...]` for fades/vignettes rather than editing source files (e.g., radial-gradient vignette on photos, linear-gradient fade on hero backgrounds)
+- **Animations:** Use `AnimateIn` wrapper with `fade-up`, `fade-left`, `fade-in` animations. Keyframes defined in `globals.css`
 - **Responsive:** Mobile-first using Tailwind breakpoints (sm → md → lg → xl). Container max-width: `max-w-7xl`
 - **Cards:** Consistent pattern — `rounded-lg`, `shadow-sm` or `ring-1 ring-gray-100`, hover lift with `-translate-y-0.5`
 - **Focus states:** `ring-2 ring-cupe-red` for form inputs and interactive elements

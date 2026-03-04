@@ -158,7 +158,7 @@ export default function Home() {
                 alt="CUPE Local 2 overhead crew maintaining streetcar lines in Toronto"
                 width={800}
                 height={600}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover [mask-image:radial-gradient(ellipse_80%_80%_at_center,black_50%,transparent_100%)]"
               />
             </div>
           </AnimateIn>
@@ -282,22 +282,26 @@ export default function Home() {
       <AnimateIn animation="fade-in">
         <section className="bg-cupe-navy">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-            <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-              <div className="text-center sm:text-left">
-                <h2 className="text-2xl font-bold text-white">
-                  CUPE Local 2 Insurance Discount
-                </h2>
-                <p className="mt-2 text-gray-300">
+            <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
+              <Image
+                src="/images/real/insurancediscount.png"
+                alt="CUPE Local 2 Insurance Discount — ICD Insurance Brokers Ltd."
+                width={685}
+                height={203}
+                className="w-full max-w-md"
+              />
+              <div className="text-center sm:text-right">
+                <p className="text-gray-300">
                   Members are eligible for exclusive insurance discounts through
                   ICD Insurance Brokers Ltd.
                 </p>
+                <a
+                  href="/documents"
+                  className="mt-4 inline-block rounded-md bg-cupe-red px-6 py-3 font-semibold text-white transition-colors hover:bg-cupe-red-dark"
+                >
+                  Learn More
+                </a>
               </div>
-              <a
-                href="/documents"
-                className="shrink-0 rounded-md bg-cupe-red px-6 py-3 font-semibold text-white transition-colors hover:bg-cupe-red-dark"
-              >
-                Learn More
-              </a>
             </div>
           </div>
         </section>
