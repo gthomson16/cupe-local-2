@@ -20,3 +20,43 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Above-the-fold entrance animations (CSS-only, no JS) */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 600ms ease-out both;
+}
+
+.animate-fade-in {
+  animation: fade-in 600ms ease-out both;
+}
+
+/* Accessibility: disable all animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

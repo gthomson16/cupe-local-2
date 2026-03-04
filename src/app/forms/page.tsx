@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import AnimateIn from "@/components/AnimateIn";
 
 export const metadata: Metadata = {
   title: "Forms",
@@ -80,26 +81,27 @@ export default function FormsPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {forms.map((form) => (
-            <a
-              key={form.title}
-              href={form.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`group flex flex-col rounded-lg p-6 ring-1 transition-all hover:-translate-y-0.5 hover:shadow-lg ${form.color}`}
-            >
-              <div className={`mb-4 flex h-14 w-14 items-center justify-center rounded-xl ${form.iconBg}`}>
-                {form.icon}
-              </div>
-              <h3 className="text-lg font-bold text-cupe-navy">{form.title}</h3>
-              <p className="mt-2 flex-1 text-sm text-gray-600">{form.description}</p>
-              <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-cupe-navy">
-                Open form
-                <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </div>
-            </a>
+          {forms.map((form, i) => (
+            <AnimateIn key={form.title} animation="fade-up" delay={Math.min(i * 75, 300)}>
+              <a
+                href={form.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group flex h-full flex-col rounded-lg p-6 ring-1 transition-all hover:-translate-y-0.5 hover:shadow-lg ${form.color}`}
+              >
+                <div className={`mb-4 flex h-14 w-14 items-center justify-center rounded-xl ${form.iconBg}`}>
+                  {form.icon}
+                </div>
+                <h3 className="text-lg font-bold text-cupe-navy">{form.title}</h3>
+                <p className="mt-2 flex-1 text-sm text-gray-600">{form.description}</p>
+                <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-cupe-navy">
+                  Open form
+                  <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </div>
+              </a>
+            </AnimateIn>
           ))}
         </div>
 

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import AnimateIn from "@/components/AnimateIn";
 
 const quickLinks = [
   {
@@ -74,19 +75,19 @@ export default function Home() {
 
         <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
           <div className="max-w-2xl">
-            <div className="mb-4 inline-block rounded-full bg-cupe-red/20 px-4 py-1.5 text-sm font-medium text-red-300">
+            <div className="animate-fade-in-up mb-4 inline-block rounded-full bg-cupe-red/20 px-4 py-1.5 text-sm font-medium text-red-300">
               700 Members Strong
             </div>
-            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="animate-fade-in-up text-4xl font-extrabold tracking-tight text-white [animation-delay:100ms] sm:text-5xl lg:text-6xl">
               Building Toronto&apos;s Transit.{" "}
               <span className="text-cupe-red">Together.</span>
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-gray-300 sm:text-xl">
+            <p className="animate-fade-in-up mt-6 text-lg leading-relaxed text-gray-300 [animation-delay:200ms] sm:text-xl">
               We are CUPE Local 2 — the skilled workers who install and maintain
               the safety-critical electrical, signal, and communication systems
               that keep the TTC running every day.
             </p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <div className="animate-fade-in-up mt-8 flex flex-col gap-4 [animation-delay:300ms] sm:flex-row">
               <Link
                 href="/registration"
                 className="inline-flex items-center justify-center rounded-md bg-cupe-red px-6 py-3 text-base font-semibold text-white shadow-lg transition-colors hover:bg-cupe-red-dark"
@@ -107,11 +108,12 @@ export default function Home() {
       {/* Quick Links Bar */}
       <section className="relative z-10 -mt-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {quickLinks.map((link) => (
+          {quickLinks.map((link, i) => (
             <Link
               key={link.href}
               href={link.href}
-              className="group rounded-lg bg-white p-4 shadow-lg ring-1 ring-gray-100 transition-all hover:-translate-y-0.5 hover:shadow-xl sm:p-5"
+              className={`animate-fade-in-up group rounded-lg bg-white p-4 shadow-lg ring-1 ring-gray-100 transition-all hover:-translate-y-0.5 hover:shadow-xl sm:p-5`}
+              style={{ animationDelay: `${300 + i * 75}ms` }}
             >
               <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-cupe-red/10 text-cupe-red transition-colors group-hover:bg-cupe-red group-hover:text-white">
                 {link.icon}
@@ -126,7 +128,7 @@ export default function Home() {
       {/* About Section */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div>
+          <AnimateIn animation="fade-left">
             <h2 className="text-3xl font-bold text-cupe-navy sm:text-4xl">
               Who We Are
             </h2>
@@ -148,16 +150,18 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </Link>
-          </div>
-          <div className="overflow-hidden rounded-lg shadow-lg">
-            <Image
-              src="/images/real/overhead-crew.jpg"
-              alt="CUPE Local 2 overhead crew maintaining streetcar lines in Toronto"
-              width={800}
-              height={600}
-              className="h-full w-full object-cover"
-            />
-          </div>
+          </AnimateIn>
+          <AnimateIn animation="fade-in">
+            <div className="overflow-hidden rounded-lg shadow-lg">
+              <Image
+                src="/images/real/overhead-crew.jpg"
+                alt="CUPE Local 2 overhead crew maintaining streetcar lines in Toronto"
+                width={800}
+                height={600}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </AnimateIn>
         </div>
       </section>
 
@@ -175,18 +179,17 @@ export default function Home() {
             </p>
           </div>
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {workgroups.map((group) => (
-              <div
-                key={group}
-                className="flex items-center gap-3 rounded-lg bg-white p-4 shadow-sm ring-1 ring-gray-100"
-              >
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cupe-red text-xs font-bold text-white">
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+            {workgroups.map((group, i) => (
+              <AnimateIn key={group} animation="fade-up" delay={Math.min(i * 50, 300)}>
+                <div className="flex items-center gap-3 rounded-lg bg-white p-4 shadow-sm ring-1 ring-gray-100">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cupe-red text-xs font-bold text-white">
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <span className="font-medium text-cupe-navy">{group}</span>
                 </div>
-                <span className="font-medium text-cupe-navy">{group}</span>
-              </div>
+              </AnimateIn>
             ))}
           </div>
         </div>
@@ -212,63 +215,61 @@ export default function Home() {
           </Link>
         </div>
         <div className="mt-8 grid gap-6 md:grid-cols-2">
-          <article className="group overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-gray-100 transition-shadow hover:shadow-lg">
-            <div className="relative h-48 overflow-hidden bg-cupe-navy">
-              <Image
-                src="/images/real/ttc-unions-standing-together.jpg"
-                alt="TTC Unions Standing Together"
-                fill
-                className="object-cover transition-transform group-hover:scale-105"
-              />
-            </div>
-            <div className="p-6">
-              <div className="text-sm text-gray-500">February 28, 2026</div>
-              <h3 className="mt-2 text-xl font-bold text-cupe-navy">
-                TTC Unions Standing Together
-              </h3>
-              <p className="mt-2 text-gray-600">
-                Leaders from CUPE Local 2, ATU Local 113, CUPE Local 470, CUPE
-                Local 5089, and IAMAW Lodge 235 came together to strengthen
-                coordination and plan our work together.
-              </p>
-              <Link
-                href="/news"
-                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-cupe-red hover:underline"
-              >
-                Read more
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-          </article>
-          <article className="group overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-gray-100 transition-shadow hover:shadow-lg">
-            <div className="relative h-48 overflow-hidden bg-white">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <img src="/images/cupe-logo-hd.png" alt="" className="h-full w-full object-contain p-6" />
+          <AnimateIn animation="fade-up">
+            <Link href="/news/ttc-unions-standing-together" className="group block overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-gray-100 transition-shadow hover:shadow-lg">
+              <div className="relative h-48 overflow-hidden bg-cupe-navy">
+                <Image
+                  src="/images/real/ttc-unions-standing-together.jpg"
+                  alt="TTC Unions Standing Together"
+                  fill
+                  className="object-cover transition-transform group-hover:scale-105"
+                />
               </div>
-            </div>
-            <div className="p-6">
-              <div className="text-sm text-gray-500">February 22, 2026</div>
-              <h3 className="mt-2 text-xl font-bold text-cupe-navy">
-                Welcome to the CUPE Local 2 News Page
-              </h3>
-              <p className="mt-2 text-gray-600">
-                Welcome to the official news page for CUPE Local 2, representing
-                700 workers at the Toronto Transit Commission. Bookmark this page
-                and check back regularly.
-              </p>
-              <Link
-                href="/news"
-                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-cupe-red hover:underline"
-              >
-                Read more
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-          </article>
+              <div className="p-6">
+                <div className="text-sm text-gray-500">February 28, 2026</div>
+                <h3 className="mt-2 text-xl font-bold text-cupe-navy">
+                  TTC Unions Standing Together
+                </h3>
+                <p className="mt-2 text-gray-600">
+                  Leaders from CUPE Local 2, ATU Local 113, CUPE Local 470, CUPE
+                  Local 5089, and IAMAW Lodge 235 came together to strengthen
+                  coordination and plan our work together.
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-cupe-red">
+                  Read more
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </Link>
+          </AnimateIn>
+          <AnimateIn animation="fade-up" delay={100}>
+            <Link href="/news/welcome-to-the-cupe-local-2-news-page" className="group block overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-gray-100 transition-shadow hover:shadow-lg">
+              <div className="relative h-48 overflow-hidden bg-white">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <img src="/images/cupe-logo-hd.png" alt="" className="h-full w-full object-contain p-6" />
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="text-sm text-gray-500">February 22, 2026</div>
+                <h3 className="mt-2 text-xl font-bold text-cupe-navy">
+                  Welcome to the CUPE Local 2 News Page
+                </h3>
+                <p className="mt-2 text-gray-600">
+                  Welcome to the official news page for CUPE Local 2, representing
+                  700 workers at the Toronto Transit Commission. Bookmark this page
+                  and check back regularly.
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-cupe-red">
+                  Read more
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </Link>
+          </AnimateIn>
         </div>
         <div className="mt-6 text-center sm:hidden">
           <Link href="/news" className="text-sm font-semibold text-cupe-red hover:underline">
@@ -278,27 +279,29 @@ export default function Home() {
       </section>
 
       {/* Insurance Discount Banner */}
-      <section className="bg-cupe-navy">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-            <div className="text-center sm:text-left">
-              <h2 className="text-2xl font-bold text-white">
-                CUPE Local 2 Insurance Discount
-              </h2>
-              <p className="mt-2 text-gray-300">
-                Members are eligible for exclusive insurance discounts through
-                ICD Insurance Brokers Ltd.
-              </p>
+      <AnimateIn animation="fade-in">
+        <section className="bg-cupe-navy">
+          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+            <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+              <div className="text-center sm:text-left">
+                <h2 className="text-2xl font-bold text-white">
+                  CUPE Local 2 Insurance Discount
+                </h2>
+                <p className="mt-2 text-gray-300">
+                  Members are eligible for exclusive insurance discounts through
+                  ICD Insurance Brokers Ltd.
+                </p>
+              </div>
+              <a
+                href="/documents"
+                className="shrink-0 rounded-md bg-cupe-red px-6 py-3 font-semibold text-white transition-colors hover:bg-cupe-red-dark"
+              >
+                Learn More
+              </a>
             </div>
-            <a
-              href="/documents"
-              className="shrink-0 rounded-md bg-cupe-red px-6 py-3 font-semibold text-white transition-colors hover:bg-cupe-red-dark"
-            >
-              Learn More
-            </a>
           </div>
-        </div>
-      </section>
+        </section>
+      </AnimateIn>
     </>
   );
 }

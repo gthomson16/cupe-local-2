@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import AnimateIn from "@/components/AnimateIn";
 
 export const metadata: Metadata = {
   title: "Executives",
@@ -61,21 +62,29 @@ export default function ExecutivesPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div>
-          <h2 className="text-2xl font-bold text-cupe-navy">Table Officers</h2>
-          <div className="mt-2 h-1 w-12 rounded bg-cupe-red" />
+          <AnimateIn animation="fade-left">
+            <h2 className="text-2xl font-bold text-cupe-navy">Table Officers</h2>
+            <div className="mt-2 h-1 w-12 rounded bg-cupe-red" />
+          </AnimateIn>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {tableOfficers.map((person) => (
-              <PersonCard key={person.name} {...person} />
+            {tableOfficers.map((person, i) => (
+              <AnimateIn key={person.name} animation="fade-up" delay={i * 75}>
+                <PersonCard {...person} />
+              </AnimateIn>
             ))}
           </div>
         </div>
 
         <div className="mt-16">
-          <h2 className="text-2xl font-bold text-cupe-navy">Executive Board</h2>
-          <div className="mt-2 h-1 w-12 rounded bg-cupe-red" />
+          <AnimateIn animation="fade-left">
+            <h2 className="text-2xl font-bold text-cupe-navy">Executive Board</h2>
+            <div className="mt-2 h-1 w-12 rounded bg-cupe-red" />
+          </AnimateIn>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {executiveBoard.map((person, i) => (
-              <PersonCard key={`${person.name}-${i}`} {...person} />
+              <AnimateIn key={`${person.name}-${i}`} animation="fade-up" delay={Math.min(i * 50, 300)}>
+                <PersonCard {...person} />
+              </AnimateIn>
             ))}
           </div>
         </div>

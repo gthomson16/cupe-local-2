@@ -21,9 +21,9 @@ export default function PageHero({ title, subtitle }: PageHeroProps) {
       <div className="absolute inset-0 bg-gradient-to-r from-cupe-navy via-cupe-navy/80 to-cupe-navy/60" />
       <div className="relative mx-auto flex h-full max-w-7xl items-end px-4 pb-10 sm:px-6 lg:px-8">
         <div>
-          <h1 className="text-4xl font-bold text-white sm:text-5xl">{title}</h1>
+          <h1 className="animate-fade-in-up text-4xl font-bold text-white sm:text-5xl">{title}</h1>
           {subtitle && (
-            <p className="mt-2 text-lg text-gray-300">{subtitle}</p>
+            <p className="animate-fade-in-up text-lg text-gray-300 [animation-delay:150ms]" style={{ marginTop: 8 }}>{subtitle}</p>
           )}
         </div>
       </div>
