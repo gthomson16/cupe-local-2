@@ -222,7 +222,7 @@ export default function Home() {
                   src="/images/real/ttc-unions-standing-together.jpg"
                   alt="TTC Unions Standing Together"
                   fill
-                  className="object-cover transition-transform group-hover:scale-105"
+                  className="object-cover object-[center_25%] transition-transform group-hover:scale-105"
                 />
               </div>
               <div className="p-6">
